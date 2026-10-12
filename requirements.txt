@@ -1,0 +1,17 @@
+# Already installed: pandas, numpy, scikit-learn, scipy, requests, networkx, matplotlib, torch
+# Need to install:
+GEOparse>=2.0.4 # GEO dataset parsing
+scanpy>=1.10 # scRNA-seq analysis
+anndata>=0.10 # scRNA-seq data structures
+pydeseq2>=0.4 # Differential expression
+leidenalg>=0.10 # Community detection for scRNA-seq
+gseapy>=1.1 # Gene set enrichment
+goatools>=1.4 # GO term analysis
+biopython>=1.83 # PubMed E-utilities, UniProt parsing
+xgboost>=2.0 # Gradient boosting
+lightgbm>=4.0 # Light gradient boosting
+catboost>=1.2 # CatBoost
+torch-geometric>=2.5 # GNN (if CPU PyTorch suffices)
+pyarrow>=14.0 # Parquet file handling
+tqdm>=4.66 # Progress bars
+seaborn>=0.13 # Statistical visualization
