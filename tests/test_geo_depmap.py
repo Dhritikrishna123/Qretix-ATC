@@ -48,3 +48,22 @@ def test_build_dependency_table_maps_ids():
     braf = dep[dep["hgnc_symbol"] == "BRAF"].iloc[0]
     assert braf["ensembl_gene_id"] == "ENSG00000157764" and braf["chronos_gene_effect"] == -1.2
     assert normalise("CAL-62") == "CAL62"
+
+def test_depmap_blocked_page_becomes_documented_gap(tmp_path, monkeypatch):
+    from src import config
+    from src.data_acquisition import depmap_fetcher as d
+    from src import decisions, provenance
+
+    class Resp:
+        headers = {"content-type": "text/html"}
+        text = "<!DOCTYPE html><title>DepMap - Verification</title>"
+
+    monkeypatch.setattr(config, "DATA_RAW", tmp_path / "raw")
+    monkeypatch.setattr(config, "DATA_PROVENANCE", tmp_path / "prov")
+    monkeypatch.setattr(config, "DOCS", tmp_path / "docs")
+    monkeypatch.setattr(config, "DECISIONS_LOG", tmp_path / "docs" / "decisions_log.md")
+    monkeypatch.setattr(d, "request", lambda *a, **k: Resp())
+    assert d.run() == ["DepMap"]
+    rec = provenance.load_provenance(tmp_path / "prov" / "DepMap.json")
+    assert rec["status"] == "manual_approval_required"
+    assert "DepMap not auto-downloadable" in (tmp_path / "docs" / "decisions_log.md").read_text()

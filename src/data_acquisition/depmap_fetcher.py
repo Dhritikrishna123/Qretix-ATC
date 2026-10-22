@@ -92,14 +92,54 @@ def build_dependency_table(gene_effect: pd.DataFrame, atc_models: pd.DataFrame, 
     return long[cols].sort_values(["cell_line", "hgnc_symbol"]).reset_index(drop=True)
 
 
-def run(force: bool = False, **_: Any) -> list[str]:
-    out_dir = config.DATA_RAW / "DepMap"
-    catalog = pd.read_csv(io.StringIO(request("GET", config.DEPMAP_FILES_API).text))
+REQUIRED_LOCAL = ("Model.csv", "CRISPRGeneEffect.csv")
+MANUAL_INSTRUCTIONS = (
+    "Download from https://depmap.org/portal/data_page/?tab=allData (latest DepMap Public release) "
+    f"and place {', '.join(FILES)} in data/raw/DepMap/, then re-run `python -m src.pipeline --phase 1 --only depmap`."
+)
+
+
+def acquire_files(out_dir, force: bool = False) -> tuple[str, list]:
+    """Return (release label, local paths). Uses files already in ``out_dir``; otherwise the DepMap
+    file catalog. The catalog sits behind a bot-verification page for scripted clients, in which case
+    we raise ``DepMapBlocked`` rather than try to bypass it."""
+    local = [out_dir / f for f in FILES]
+    if all((out_dir / f).exists() for f in REQUIRED_LOCAL) and not force:
+        release_file = out_dir / "RELEASE.txt"
+        label = release_file.read_text().strip() if release_file.exists() else "DepMap Public (manually supplied)"
+        return label, [p for p in local if p.exists()]
+    resp = request("GET", config.DEPMAP_FILES_API)
+    text = resp.text
+    if "text/csv" not in resp.headers.get("content-type", "") and not text.lstrip().startswith("release"):
+        raise DepMapBlocked("DepMap file catalog returned a verification page instead of CSV")
+    catalog = pd.read_csv(io.StringIO(text))
     release, sub = resolve_release(catalog)
     paths = []
     for fn in FILES:
         url = sub.loc[sub["filename"] == fn, "url"].iloc[0]
         paths.append(download(url, out_dir / fn, force=force)["path"])
+    (out_dir / "RELEASE.txt").write_text(release)
+    return release, paths
+
+
+class DepMapBlocked(RuntimeError):
+    pass
+
+
+def run(force: bool = False, **_: Any) -> list[str]:
+    out_dir = config.DATA_RAW / "DepMap"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    try:
+        release, paths = acquire_files(out_dir, force=force)
+    except DepMapBlocked as exc:
+        log_decision("data gap", "DepMap not auto-downloadable (bot verification)",
+                     f"{exc}. The depmap_atc_dependency.csv output is pending. {MANUAL_INSTRUCTIONS}")
+        write_provenance("DepMap", build_record(
+            source="DepMap Portal", accession="pending manual download",
+            url="https://depmap.org/portal/data_page/?tab=allData", modality="CRISPR dependency + omics (cell lines)",
+            platform="CRISPR-Cas9 Chronos", license="CC BY 4.0", status="manual_approval_required",
+            notes=f"Automated download blocked by DepMap bot verification. {MANUAL_INSTRUCTIONS}"))
+        return ["DepMap"]
 
     models = pd.read_csv(out_dir / "Model.csv")
     atc, excluded = select_atc_models(models)
