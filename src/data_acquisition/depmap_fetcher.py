@@ -24,6 +24,21 @@ FILES = [
     "OmicsCNGene.csv",
     "OmicsSomaticMutations.csv",
 ]
+# Newer DepMap releases renamed some tables; accept either name for each logical file.
+ALIASES = {
+    "OmicsExpressionProteinCodingGenesTPMLogp1.csv": ["OmicsExpressionTPMLogp1HumanProteinCodingGenes.csv"],
+    "OmicsCNGene.csv": ["OmicsCNGeneWGS.csv"],
+}
+
+
+def candidates(name: str) -> list[str]:
+    return [name, *ALIASES.get(name, [])]
+
+
+def find_local(out_dir, name: str):
+    """Path of ``name`` (or a known alias) in ``out_dir``, or None."""
+    return next((out_dir / c for c in candidates(name) if (out_dir / c).exists()), None)
+
 OUT_CSV = config.DATA_PROCESSED / "depmap_atc_dependency.csv"
 
 
@@ -41,7 +56,7 @@ def resolve_release(catalog: pd.DataFrame) -> tuple[str, pd.DataFrame]:
     pub = catalog[catalog["release"].str.contains("DepMap Public", na=False)]
     for rel in sorted(pub["release"].unique(), key=release_sort_key, reverse=True):
         sub = pub[pub["release"] == rel]
-        if set(FILES) <= set(sub["filename"]):
+        if all(any(c in set(sub["filename"]) for c in candidates(f)) for f in FILES):
             return rel, sub
     raise RuntimeError("No DepMap Public release contains all required files")
 
@@ -103,11 +118,11 @@ def acquire_files(out_dir, force: bool = False) -> tuple[str, list]:
     """Return (release label, local paths). Uses files already in ``out_dir``; otherwise the DepMap
     file catalog. The catalog sits behind a bot-verification page for scripted clients, in which case
     we raise ``DepMapBlocked`` rather than try to bypass it."""
-    local = [out_dir / f for f in FILES]
-    if all((out_dir / f).exists() for f in REQUIRED_LOCAL) and not force:
+    local = [p for p in (find_local(out_dir, f) for f in FILES) if p]
+    if all(find_local(out_dir, f) for f in REQUIRED_LOCAL) and not force:
         release_file = out_dir / "RELEASE.txt"
         label = release_file.read_text().strip() if release_file.exists() else "DepMap Public (manually supplied)"
-        return label, [p for p in local if p.exists()]
+        return label, local
     resp = request("GET", config.DEPMAP_FILES_API)
     text = resp.text
     if "text/csv" not in resp.headers.get("content-type", "") and not text.lstrip().startswith("release"):
@@ -116,8 +131,9 @@ def acquire_files(out_dir, force: bool = False) -> tuple[str, list]:
     release, sub = resolve_release(catalog)
     paths = []
     for fn in FILES:
-        url = sub.loc[sub["filename"] == fn, "url"].iloc[0]
-        paths.append(download(url, out_dir / fn, force=force)["path"])
+        name = next(c for c in candidates(fn) if c in set(sub["filename"]))
+        url = sub.loc[sub["filename"] == name, "url"].iloc[0]
+        paths.append(download(url, out_dir / name, force=force)["path"])
     (out_dir / "RELEASE.txt").write_text(release)
     return release, paths
 
@@ -163,7 +179,7 @@ def run(force: bool = False, **_: Any) -> list[str]:
         sample_count=int(len(atc)), modality="CRISPR dependency + omics (cell lines)",
         platform="CRISPR-Cas9 Chronos; expression TPM log2(x+1); CN; somatic mutations",
         license="CC BY 4.0",
-        raw_files=FILES, checksums=checksums_for(paths, out_dir),
+        raw_files=[p.name for p in paths], checksums=checksums_for(paths, out_dir),
         notes=(f"Release {release}. {len(atc)} authenticated ATC lines retained "
                f"({', '.join(sorted(atc['CellLineName']))}); {len(excluded)} ATC-labelled lines excluded."),
         qc_thresholds_applied={"lineage": "Thyroid", "subtype": "contains Anaplastic",

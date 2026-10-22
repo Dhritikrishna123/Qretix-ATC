@@ -67,3 +67,12 @@ def test_depmap_blocked_page_becomes_documented_gap(tmp_path, monkeypatch):
     rec = provenance.load_provenance(tmp_path / "prov" / "DepMap.json")
     assert rec["status"] == "manual_approval_required"
     assert "DepMap not auto-downloadable" in (tmp_path / "docs" / "decisions_log.md").read_text()
+
+
+def test_depmap_renamed_files_are_found(tmp_path):
+    from src.data_acquisition.depmap_fetcher import find_local
+    (tmp_path / "OmicsCNGeneWGS.csv").write_text("x")
+    (tmp_path / "OmicsExpressionTPMLogp1HumanProteinCodingGenes.csv").write_text("x")
+    assert find_local(tmp_path, "OmicsCNGene.csv").name == "OmicsCNGeneWGS.csv"
+    assert find_local(tmp_path, "OmicsExpressionProteinCodingGenesTPMLogp1.csv").name.startswith("OmicsExpressionTPMLogp1")
+    assert find_local(tmp_path, "Model.csv") is None
