@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Large raw downloads are reproducible via `python -m src.pipeline --phase 1`;
+# only their provenance JSON (data/provenance/) is tracked.
+data/raw/*
+!data/raw/.gitkeep
+literature/*.json
+!literature/.gitkeep
+*.part
