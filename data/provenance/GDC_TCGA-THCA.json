@@ -1,0 +1,27 @@
+{
+  "source": "NCI GDC",
+  "accession": "TCGA-THCA",
+  "url": "https://portal.gdc.cancer.gov/projects/TCGA-THCA",
+  "date_pulled": "2026-10-22T16:41:59+00:00",
+  "sample_count": 1025,
+  "modality": "genomics + transcriptomics (PTC reference)",
+  "platform": "TCGA (STAR counts, masked MAF, masked CNV segments)",
+  "license": "GDC open-access data (NCI GDC Data Access Policies)",
+  "raw_files": [
+    "manifest.json"
+  ],
+  "checksums": {
+    "manifest.json": "sha256:7117f1db441089d4c48e0576cce9d45b5cd97d458d5e5a9fb61566f2dfad1206"
+  },
+  "notes": "Labelled as PTC / differentiated-thyroid REFERENCE, NOT ATC. Manifest file counts: {'mutations_maf': 498, 'cnv_segments': 1025, 'expression_counts': 572}. Data downloads: manifest only (use --gdc-download).",
+  "qc_thresholds_applied": null,
+  "is_processed": false,
+  "status": "ok",
+  "file_counts": {
+    "mutations_maf": 498,
+    "cnv_segments": 1025,
+    "expression_counts": 572
+  },
+  "is_atc_evidence": false,
+  "downloaded": false
+}

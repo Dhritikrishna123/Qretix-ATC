@@ -1,0 +1,21 @@
+{
+  "source": "Open Targets Platform",
+  "accession": "MONDO:0006468",
+  "url": "https://api.platform.opentargets.org/api/v4/graphql",
+  "date_pulled": "2026-10-22T16:45:10+00:00",
+  "sample_count": 1293,
+  "modality": "disease-target associations + tractability",
+  "platform": "GraphQL API v4",
+  "license": "CC0 1.0",
+  "raw_files": [
+    "atc_associated_targets.json"
+  ],
+  "checksums": {
+    "atc_associated_targets.json": "sha256:ce682699011e5ccd40b4172b58b13dfe8d4eab68b397abdab2d764527f4199c3"
+  },
+  "notes": "'thyroid gland undifferentiated (anaplastic) carcinoma': 1,293 associated targets (0 with overall score > 0.5, used in the Phase 6 novelty checklist). Replaces DrugBank/DisGeNET for druggability and association evidence.",
+  "qc_thresholds_applied": null,
+  "is_processed": false,
+  "status": "ok",
+  "disease_name": "thyroid gland undifferentiated (anaplastic) carcinoma"
+}

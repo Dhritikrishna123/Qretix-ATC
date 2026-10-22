@@ -1,0 +1,44 @@
+{
+  "source": "NCBI GEO",
+  "accession": "GSE193581",
+  "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE193581",
+  "date_pulled": "2026-10-22T16:52:17+00:00",
+  "sample_count": 32,
+  "modality": "scRNA-seq",
+  "platform": "10x Genomics 3' v3 [GPL24676]",
+  "license": "Public domain (GEO submission agreement)",
+  "raw_files": [
+    "GSE193581_series_matrix.txt.gz",
+    "GSE193581_family.soft.gz",
+    "suppl/GSE193581_ATC_cell_line_bulk_count.txt.gz",
+    "suppl/GSE193581_RAW.tar",
+    "suppl/GSE193581_celltype_annotation.txt.gz",
+    "suppl/filelist.txt",
+    "GSE193581_sample_metadata.tsv"
+  ],
+  "checksums": {
+    "GSE193581_series_matrix.txt.gz": "sha256:0f9c3c2a25a262293d8ebff751ee34db4ba0133014f95e76cbd5ea4baea0188b",
+    "GSE193581_family.soft.gz": "sha256:9dc870b94ffbfdd447fb7ace31e78e78b95c4910cee468ebe9ea0051e97bc395",
+    "suppl/GSE193581_ATC_cell_line_bulk_count.txt.gz": "sha256:9a4c7b458e92592db20667edc5168c05b28c525fbdd925257675115ed76180c6",
+    "suppl/GSE193581_RAW.tar": "sha256:0e401bf15bad060fac9f645e1c22a2279bcd59b35879c47dcf48e4a7781f4311",
+    "suppl/GSE193581_celltype_annotation.txt.gz": "sha256:3e8545b07386e0339ef3694ea2617b5d0c054ca61f8e1c8ae7bf5ce721a849b0",
+    "suppl/filelist.txt": "sha256:b5406aa7cc2ea52b04ca1cf426eef8eb7228702379158aca15102a2ee33740b4",
+    "GSE193581_sample_metadata.tsv": "sha256:16c09fb50318c9df559f25f09e8470cfcd28fbc5a0713dee996c651c744730c5"
+  },
+  "notes": "Lu et al., JCI 2023. 10 ATC, 7 PTC, 6 adjacent normal thyroid.",
+  "qc_thresholds_applied": null,
+  "is_processed": false,
+  "status": "ok",
+  "series_title": "Anaplastic Transformation Model in Thyroid Cancer Revealed by Single Cell Lineage and Fate Analysis ",
+  "series_summary": "The deadliest anaplastic thyroid cancer (ATC) often transforms from indolent differentiated thyroid cancer (DTC), however the complex intra-tumor transformation process is poorly understood.  We investigated an anaplastic transformation model by dissecting both cell lineage and cell fate transitions using single cell transcriptomes and genetic alterations data of patients with different subtypes of thyroid cancer. The resulting model started from stress-responsive DTC cells to inflammatory ATC cells, to mitotic defective ATC cells and extended all the way to mesenchymal ATC cells.  In parallel with tumor cell evolution, macrophages shifted from anti-tumor to tumor-promoting states and T cells reprogrammed from cytotoxic to exhausted states.  Further, our analysis identified two important milestones: 1) diploid stage, where ATC cells were commonly diploids with non-RAS mutations and inflammatory phenotypes.  2) aneuploid stage, where ATC cells gained aneuploidy with frequent RAS mutations and mesenchymal phenotypes leading to the extreme lethal stage of ATC progression.  ",
+  "pubmed_ids": [
+    "37053016"
+  ],
+  "supplementary_files": [
+    "GSE193581_ATC_cell_line_bulk_count.txt.gz",
+    "GSE193581_RAW.tar",
+    "GSE193581_celltype_annotation.txt.gz",
+    "filelist.txt"
+  ],
+  "sample_metadata_table": "data/raw/GSE193581/GSE193581_sample_metadata.tsv"
+}

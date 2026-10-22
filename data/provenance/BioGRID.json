@@ -1,0 +1,17 @@
+{
+  "source": "BioGRID",
+  "accession": "n/a",
+  "url": "https://thebiogrid.org",
+  "date_pulled": "2026-10-22T16:45:10+00:00",
+  "sample_count": "n/a",
+  "modality": "knowledge base",
+  "platform": "n/a",
+  "license": "MIT (data); free API key required",
+  "raw_files": [],
+  "checksums": {},
+  "notes": "Skipped (API key required). STRING + Reactome provide sufficient PPI coverage.",
+  "qc_thresholds_applied": null,
+  "is_processed": false,
+  "status": "skipped",
+  "downstream_impact": "PPI features use STRING (score >= 400) + Reactome only."
+}

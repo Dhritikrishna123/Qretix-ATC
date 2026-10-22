@@ -1,0 +1,26 @@
+{
+  "source": "PubMed (NCBI E-utilities)",
+  "accession": "query: \"anaplastic thyroid carcinoma\"[tiab] OR \"anaplastic thyroid cancer\"[tiab]",
+  "url": "https://pubmed.ncbi.nlm.nih.gov/?term=\"anaplastic+thyroid+carcinoma\"[tiab]+OR+\"anaplastic+thyroid+cancer\"[tiab]",
+  "date_pulled": "2026-10-22T16:47:30+00:00",
+  "sample_count": 3248,
+  "modality": "literature",
+  "platform": "PubMed XML",
+  "license": "NLM data (public; abstracts retain publisher copyright)",
+  "raw_files": [
+    "literature/atc_pubmed_corpus.json"
+  ],
+  "checksums": {
+    "literature/atc_pubmed_corpus.json": "sha256:95cad8a3ef6040b307e84afeb3a91eca719e7a3b7841f411b6bc15587b1c9eba"
+  },
+  "notes": "ATC-specific corpus: 3,248 articles, 3,248 with publication dates (PMID, title, abstract, date, journal, MeSH, author affiliations). Dates preserved per record for Phase 7.",
+  "qc_thresholds_applied": null,
+  "is_processed": false,
+  "status": "ok",
+  "query": "\"anaplastic thyroid carcinoma\"[tiab] OR \"anaplastic thyroid cancer\"[tiab]",
+  "years": [
+    1950,
+    2026
+  ],
+  "records_with_date": 3248
+}

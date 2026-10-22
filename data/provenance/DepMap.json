@@ -1,0 +1,72 @@
+{
+  "source": "DepMap Portal",
+  "accession": "DepMap Public (manually supplied)",
+  "url": "https://depmap.org/portal/data_page/",
+  "date_pulled": "2026-10-22T16:45:59+00:00",
+  "sample_count": 7,
+  "modality": "CRISPR dependency + omics (cell lines)",
+  "platform": "CRISPR-Cas9 Chronos; expression TPM log2(x+1); CN; somatic mutations",
+  "license": "CC BY 4.0",
+  "raw_files": [
+    "CRISPRGeneEffect.csv",
+    "Model.csv",
+    "OmicsExpressionTPMLogp1HumanProteinCodingGenes.csv",
+    "OmicsCNGeneWGS.csv",
+    "OmicsSomaticMutations.csv"
+  ],
+  "checksums": {
+    "CRISPRGeneEffect.csv": "sha256:1e0c492944a7297c0eda179081a1e81a1cfe41a97628facd7eddbdda1a7504ee",
+    "Model.csv": "sha256:65eb1895800e71a963a3ab56e5d08c8d006cb0d9e7aa68f7e34a3810a2a3cbc7",
+    "OmicsExpressionTPMLogp1HumanProteinCodingGenes.csv": "sha256:252d1fedc7014953b19ffe5d68151b4df973c8078b12c9e5ccd97e292548d177",
+    "OmicsCNGeneWGS.csv": "sha256:31cace66f202adaace306d975b5661c8b77ea82f07d2ed34045eec9c7958fcd6",
+    "OmicsSomaticMutations.csv": "sha256:b8f89677d4ce2b724e48e2276f9a47f5b6fdaff3cab0bf115f90ef97c1be1cfd"
+  },
+  "notes": "Release DepMap Public (manually supplied). 7 authenticated ATC lines retained (8305C, 8505C, ASH-3, BHT-101, CAL-62, HTC-C3, MB-1); 6 ATC-labelled lines excluded.",
+  "qc_thresholds_applied": {
+    "lineage": "Thyroid",
+    "subtype": "contains Anaplastic",
+    "authenticated_only": true,
+    "excluded_contaminated": [
+      "ARO",
+      "DRO",
+      "FRO",
+      "KAT4",
+      "NPA"
+    ]
+  },
+  "is_processed": true,
+  "status": "ok",
+  "processed_output": "data/processed/depmap_atc_dependency.csv",
+  "excluded_lines": [
+    {
+      "ModelID": "ACH-002041",
+      "CellLineName": "HOTHC",
+      "exclusion_reason": "ATC-labelled in DepMap but not in authenticated ATC list"
+    },
+    {
+      "ModelID": "ACH-002397",
+      "CellLineName": "KMH-2",
+      "exclusion_reason": "ATC-labelled in DepMap but not in authenticated ATC list"
+    },
+    {
+      "ModelID": "ACH-003468",
+      "CellLineName": "CCLF_THYR_0003_T",
+      "exclusion_reason": "ATC-labelled in DepMap but not in authenticated ATC list"
+    },
+    {
+      "ModelID": "ACH-003469",
+      "CellLineName": "CCLF_THYR_0004_T",
+      "exclusion_reason": "ATC-labelled in DepMap but not in authenticated ATC list"
+    },
+    {
+      "ModelID": "ACH-003470",
+      "CellLineName": "CCLF_THYR_0005_T",
+      "exclusion_reason": "ATC-labelled in DepMap but not in authenticated ATC list"
+    },
+    {
+      "ModelID": "ACH-003480",
+      "CellLineName": "CCLF_THYR_0001_T",
+      "exclusion_reason": "ATC-labelled in DepMap but not in authenticated ATC list"
+    }
+  ]
+}

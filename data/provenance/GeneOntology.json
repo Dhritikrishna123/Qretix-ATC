@@ -1,0 +1,22 @@
+{
+  "source": "Gene Ontology Consortium",
+  "accession": "go.obo releases/2026-07-26",
+  "url": "https://purl.obolibrary.org/obo/go.obo",
+  "date_pulled": "2026-10-22T16:45:07+00:00",
+  "sample_count": "n/a",
+  "modality": "ontology + gene annotations",
+  "platform": "OBO + GAF 2.2",
+  "license": "CC BY 4.0",
+  "raw_files": [
+    "go.obo",
+    "goa_human.gaf.gz"
+  ],
+  "checksums": {
+    "go.obo": "sha256:d3593751d885ca160b2ab7baf6c7eccd88ca3c4599f79436c674bad661095ff0",
+    "goa_human.gaf.gz": "sha256:db472faff1785878521693af62646546cea6af4a386609dd01c72c0554a46a30"
+  },
+  "notes": "go.obo (releases/2026-07-26) and goa_human.gaf annotations (static downloads).",
+  "qc_thresholds_applied": null,
+  "is_processed": false,
+  "status": "ok"
+}

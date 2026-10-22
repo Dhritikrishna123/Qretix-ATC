@@ -1,0 +1,23 @@
+{
+  "source": "NCBI GEO",
+  "accession": "GSM7030310",
+  "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM7030310",
+  "date_pulled": "2026-10-22T16:25:55+00:00",
+  "sample_count": 1,
+  "modality": "verification",
+  "platform": "GPL24676\r",
+  "license": "Public domain (GEO submission agreement)",
+  "raw_files": [],
+  "checksums": {},
+  "notes": "GSM7030310 belongs to GSE224719, GSE224721 and is NOT part of GSE193581; treat as a separate cohort.",
+  "qc_thresholds_applied": null,
+  "is_processed": false,
+  "status": "ok",
+  "parent_series": [
+    "GSE224719",
+    "GSE224721"
+  ],
+  "is_part_of_gse193581": false,
+  "sample_title": "ATC patient, scRNA\r",
+  "sample_source": "Thyroid\r"
+}

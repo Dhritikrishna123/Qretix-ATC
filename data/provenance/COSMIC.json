@@ -1,0 +1,17 @@
+{
+  "source": "COSMIC",
+  "accession": "n/a",
+  "url": "https://cancer.sanger.ac.uk/cosmic",
+  "date_pulled": "2026-10-22T16:45:10+00:00",
+  "sample_count": "n/a",
+  "modality": "knowledge base",
+  "platform": "n/a",
+  "license": "COSMIC licence (registration + acceptance required)",
+  "raw_files": [],
+  "checksums": {},
+  "notes": "Cancer Gene Census requires licence acceptance; cannot be auto-accessed. Flagged as a provenance gap.",
+  "qc_thresholds_applied": null,
+  "is_processed": false,
+  "status": "manual_approval_required",
+  "downstream_impact": "Novelty checklist item 4 (COSMIC CGC thyroid) and Phase 4 hard negatives (Cancer Gene Census) will use an alternative or be logged as a gap."
+}

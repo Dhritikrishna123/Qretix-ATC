@@ -1,0 +1,16 @@
+{
+  "source": "PRIDE",
+  "accession": "PXD063991",
+  "url": "https://www.ebi.ac.uk/pride/archive/projects/PXD063991",
+  "date_pulled": "2026-10-22T16:42:08+00:00",
+  "sample_count": "n/a",
+  "modality": "proteomics",
+  "platform": "n/a",
+  "license": "CC0",
+  "raw_files": [],
+  "checksums": {},
+  "notes": "PRIDE project metadata not retrievable: Expecting value: line 1 column 1 (char 0)",
+  "qc_thresholds_applied": null,
+  "is_processed": false,
+  "status": "not_available"
+}

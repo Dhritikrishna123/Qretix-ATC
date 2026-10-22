@@ -1,0 +1,17 @@
+{
+  "source": "DrugBank",
+  "accession": "n/a",
+  "url": "https://go.drugbank.com",
+  "date_pulled": "2026-10-22T16:45:10+00:00",
+  "sample_count": "n/a",
+  "modality": "knowledge base",
+  "platform": "n/a",
+  "license": "DrugBank licence (licensed, academic request)",
+  "raw_files": [],
+  "checksums": {},
+  "notes": "Licensed resource; cannot be auto-accessed. ChEMBL + Open Targets used for druggability/pharmacology.",
+  "qc_thresholds_applied": null,
+  "is_processed": false,
+  "status": "manual_approval_required",
+  "downstream_impact": "Druggability tiers rely on Open Targets tractability + ChEMBL."
+}
