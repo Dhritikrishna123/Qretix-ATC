@@ -96,6 +96,15 @@ def fetch_series(accession: str, force: bool = False, supplementary: bool = True
     meta.to_csv(meta_path, sep="\t", index=False)
     files.append(meta_path)
 
+    raw_tar = out_dir / "suppl" / f"{accession}_RAW.tar"
+    if raw_tar.exists():
+        samples_dir = out_dir / "samples"
+        samples_dir.mkdir(parents=True, exist_ok=True)
+        import tarfile
+        with tarfile.open(raw_tar) as tf:
+            tf.extractall(samples_dir)
+        files.extend(list(samples_dir.glob("*.txt.gz")))
+
     platform = ", ".join(sorted(set(series.get("Series_platform_id", [])))) or info["platform"]
     write_provenance(
         accession,

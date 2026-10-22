@@ -18,22 +18,29 @@ CBIO_LICENSE = "Open access via cBioPortal (see study citation / publication ter
 GDC_LICENSE = "GDC open-access data (NCI GDC Data Access Policies)"
 
 
+CBIO_STUDY_MAP = {
+    "thca_gatci_cellrep_2024": "thyroid_gatci_2024",
+    "thca_mskcc_2016": "thyroid_mskcc_2016",
+}
+
+
 def fetch_cbio_study(study_id: str, force: bool = False) -> str:
     desc = config.CBIO_STUDIES[study_id]
+    remote_id = CBIO_STUDY_MAP.get(study_id, study_id)
     out_dir = config.DATA_RAW / study_id
     try:
-        meta = get_json(f"{config.CBIOPORTAL_API}/studies/{study_id}")
+        meta = get_json(f"{config.CBIOPORTAL_API}/studies/{remote_id}")
     except Exception as exc:
-        log_decision("data gap", f"cBioPortal study {study_id} unavailable", f"API lookup failed: {exc}")
+        log_decision("data gap", f"cBioPortal study {study_id} unavailable", f"API lookup failed for {remote_id}: {exc}")
         write_provenance(study_id, build_record(
-            source="cBioPortal", accession=study_id, url=f"{config.CBIOPORTAL_API}/studies/{study_id}",
+            source="cBioPortal", accession=study_id, url=f"{config.CBIOPORTAL_API}/studies/{remote_id}",
             modality="genomics", platform="n/a", license=CBIO_LICENSE, status="not_available",
             notes=f"{desc}: study not found on cBioPortal ({exc}).",
         ))
         return study_id
 
     tar_path = out_dir / f"{study_id}.tar.gz"
-    download(f"{config.CBIOPORTAL_DATAHUB}/{study_id}.tar.gz", tar_path, force=force)
+    download(f"{config.CBIOPORTAL_DATAHUB}/{remote_id}.tar.gz", tar_path, force=force)
     extracted: list[Path] = []
     with tarfile.open(tar_path) as tf:
         for member in tf.getmembers():
@@ -52,15 +59,15 @@ def fetch_cbio_study(study_id: str, force: bool = False) -> str:
     wanted = wanted or extracted
     write_provenance(study_id, build_record(
         source="cBioPortal",
-        accession=study_id,
-        url=f"https://www.cbioportal.org/study/summary?id={study_id}",
+        accession=f"{study_id} ({remote_id})",
+        url=f"https://www.cbioportal.org/study/summary?id={remote_id}",
         sample_count=meta.get("allSampleCount"),
         modality="genomics (mutations, CNA, structural variants, clinical)",
         platform="Pre-called calls from cBioPortal datahub (not raw VCFs)",
         license=CBIO_LICENSE,
         raw_files=[str(p.relative_to(out_dir)).replace("\\", "/") for p in wanted],
         checksums=checksums_for(wanted, out_dir),
-        notes=f"{desc}. Already-processed calls — not raw VCFs. Citation: {meta.get('citation', 'n/a')}",
+        notes=f"{desc}. Already-processed calls (not raw VCFs). Citation: {meta.get('citation', 'n/a')}",
         study_name=meta.get("name"),
         pmid=meta.get("pmid"),
     ))
