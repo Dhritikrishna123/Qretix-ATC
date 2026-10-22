@@ -54,7 +54,7 @@ def sha256_file(path: Path, chunk: int = 1 << 20) -> str:
 
 
 def download(url: str, dest: Path, *, force: bool = False, **kw: Any) -> dict[str, Any]:
-    """Stream ``url`` to ``dest`` (atomic via .part). Skips if present unless ``force``.
+    """Stream ``url`` to ``dest`` (atomic via .part with HTTP Range resume). Skips if present unless ``force``.
 
     Returns ``{"path", "size", "sha256"}``.
     """
@@ -63,9 +63,21 @@ def download(url: str, dest: Path, *, force: bool = False, **kw: Any) -> dict[st
     if dest.exists() and dest.stat().st_size > 0 and not force:
         return {"path": dest, "size": dest.stat().st_size, "sha256": sha256_file(dest)}
     part = dest.with_suffix(dest.suffix + ".part")
-    with get_session().request("GET", url, stream=True, timeout=300, **kw) as r:
-        r.raise_for_status()
-        with open(part, "wb") as fh:
+    headers = dict(kw.pop("headers", {}))
+    existing = part.stat().st_size if part.exists() and not force else 0
+    if existing > 0:
+        headers["Range"] = f"bytes={existing}-"
+    
+    with get_session().request("GET", url, stream=True, timeout=300, headers=headers, **kw) as r:
+        if r.status_code == 206:
+            # Resuming
+            mode = "ab"
+        elif r.status_code == 200:
+            mode = "wb"
+        else:
+            r.raise_for_status()
+            mode = "wb"
+        with open(part, mode) as fh:
             for block in r.iter_content(chunk_size=1 << 20):
                 if block:
                     fh.write(block)

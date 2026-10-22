@@ -103,13 +103,16 @@ class GeneUniverse:
         self._alias: dict[str, str] = {}
         self._prev: dict[str, str] = {}
         for row in self.df.itertuples(index=False):
-            for u in (row.uniprot_ids or "").split("|"):
+            u_ids = row.uniprot_ids if isinstance(row.uniprot_ids, str) else ""
+            for u in u_ids.split("|"):
                 if u:
                     self._uniprot.setdefault(u, row.ensembl_gene_id)
-            for a in (row.aliases or "").split("|"):
+            aliases = row.aliases if isinstance(row.aliases, str) else ""
+            for a in aliases.split("|"):
                 if a:
                     self._alias.setdefault(a, row.ensembl_gene_id)
-            for p in (row.previous_symbols or "").split("|"):
+            prevs = row.previous_symbols if isinstance(row.previous_symbols, str) else ""
+            for p in prevs.split("|"):
                 if p:
                     self._prev.setdefault(p, row.ensembl_gene_id)
         self._by_ens = self.df.set_index("ensembl_gene_id")

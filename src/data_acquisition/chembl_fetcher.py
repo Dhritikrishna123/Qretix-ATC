@@ -4,6 +4,7 @@ Candidates = top Open Targets ATC associations + the known ATC driver list.
 """
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 from typing import Any
 
@@ -17,7 +18,7 @@ KNOWN_ATC_DRIVERS = [
     "EIF1AX", "AKT1", "NF2", "RB1", "ATM", "ARID1A", "MAP2K1", "RET", "NTRK1",
 ]
 TOP_N_OPENTARGETS = 100
-MAX_ACTIVITY_PAGES = 5
+MAX_ACTIVITY_PAGES = 1
 
 
 def chembl(path: str, **params: Any) -> dict[str, Any]:
@@ -66,12 +67,25 @@ def run(force: bool = False, **_: Any) -> list[str]:
     uni = GeneUniverse()
     results: list[dict[str, Any]] = []
     failures: list[str] = []
-    for sym in candidate_symbols():
+    candidates = candidate_symbols()
+    
+    def _worker(sym: str) -> tuple[str, dict[str, Any] | None, str | None]:
         ens = uni.from_symbol(sym)
         try:
-            results.append(fetch_target(sym, uni.uniprot(ens) if ens else None))
+            return sym, fetch_target(sym, uni.uniprot(ens) if ens else None), None
         except Exception as exc:
-            failures.append(f"{sym}: {exc}")
+            return sym, None, f"{sym}: {exc}"
+
+    with ThreadPoolExecutor(max_workers=5) as pool:
+        futs = {pool.submit(_worker, sym): sym for sym in candidates}
+        for fut in as_completed(futs):
+            sym, rec, err = fut.result()
+            if rec is not None:
+                results.append(rec)
+            if err is not None:
+                failures.append(err)
+
+    results.sort(key=lambda r: candidates.index(r["symbol"]) if r["symbol"] in candidates else 999)
     path = out_dir / "candidate_target_modulators.json"
     path.write_text(json.dumps(results, indent=1), encoding="utf-8")
     with_chembl = sum(1 for r in results if r["target_chembl_id"])

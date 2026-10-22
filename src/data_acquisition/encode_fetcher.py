@@ -19,7 +19,12 @@ def search(**params: Any) -> dict[str, Any]:
     q: list[tuple[str, str]] = [("type", "Experiment"), ("status", "released"), ("format", "json"), ("limit", "all")]
     q += [("field", f) for f in FIELDS]
     q += list(params.items())  # type: ignore[arg-type]
-    return get_json(f"{config.ENCODE_BASE}/search/", params=q, headers=HEADERS)
+    try:
+        return get_json(f"{config.ENCODE_BASE}/search/", params=q, headers=HEADERS)
+    except Exception as exc:
+        if "404" in str(exc):
+            return {"@graph": []}
+        raise
 
 
 def pick_reference_files(experiments: list[dict[str, Any]]) -> list[dict[str, Any]]:
