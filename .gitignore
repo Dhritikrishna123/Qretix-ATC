@@ -11,3 +11,4 @@ literature/*.json
 !literature/.gitkeep
 *.part
 *.log
+data/hf_export/
