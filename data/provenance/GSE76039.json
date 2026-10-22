@@ -2,7 +2,7 @@
   "source": "NCBI GEO",
   "accession": "GSE76039",
   "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE76039",
-  "date_pulled": "2026-10-22T16:25:54+00:00",
+  "date_pulled": "2026-10-22T17:03:50+00:00",
   "sample_count": 37,
   "modality": "bulk microarray + mutation data",
   "platform": "Affymetrix Human Genome U133 Plus 2.0 (GPL570) [GPL570]",
@@ -10,11 +10,15 @@
   "raw_files": [
     "GSE76039_series_matrix.txt.gz",
     "GSE76039_family.soft.gz",
+    "suppl/GSE76039_RAW.tar",
+    "suppl/filelist.txt",
     "GSE76039_sample_metadata.tsv"
   ],
   "checksums": {
     "GSE76039_series_matrix.txt.gz": "sha256:b5c5d68fd23e1f4f9b637a4261551cf4f74cd9918a6e6e66cc6b688fd39a4af0",
     "GSE76039_family.soft.gz": "sha256:efb80e6abeb22c5ef379a99cbab2e3d4570e95c002a98b4bf40b958a1746491c",
+    "suppl/GSE76039_RAW.tar": "sha256:82ed80b964733e9f7781d45583c61e5c6d40bcc6ab3ec554ce1b50b2410d9eaf",
+    "suppl/filelist.txt": "sha256:f290a27681c316830a841d7a164ec0de36de8cf402631085a029ef2092e9c23e",
     "GSE76039_sample_metadata.tsv": "sha256:b29bbf5b9a1a08016e74b63781f3765fe7edbe4eaecff65635db99a5ae8bcf5e"
   },
   "notes": "Landa et al., JCI 2016. 37 PDTC/ATC tumours.",
@@ -27,6 +31,9 @@
     "26878173",
     "33654411"
   ],
-  "supplementary_files": [],
+  "supplementary_files": [
+    "GSE76039_RAW.tar",
+    "filelist.txt"
+  ],
   "sample_metadata_table": "data/raw/GSE76039/GSE76039_sample_metadata.tsv"
 }

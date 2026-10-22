@@ -2,7 +2,7 @@
   "source": "PubMed (NCBI E-utilities)",
   "accession": "query: \"anaplastic thyroid carcinoma\"[tiab] OR \"anaplastic thyroid cancer\"[tiab]",
   "url": "https://pubmed.ncbi.nlm.nih.gov/?term=\"anaplastic+thyroid+carcinoma\"[tiab]+OR+\"anaplastic+thyroid+cancer\"[tiab]",
-  "date_pulled": "2026-10-22T16:47:30+00:00",
+  "date_pulled": "2026-10-22T17:06:01+00:00",
   "sample_count": 3248,
   "modality": "literature",
   "platform": "PubMed XML",

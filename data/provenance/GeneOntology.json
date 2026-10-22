@@ -2,7 +2,7 @@
   "source": "Gene Ontology Consortium",
   "accession": "go.obo releases/2026-07-26",
   "url": "https://purl.obolibrary.org/obo/go.obo",
-  "date_pulled": "2026-10-22T16:45:07+00:00",
+  "date_pulled": "2026-10-22T17:04:28+00:00",
   "sample_count": "n/a",
   "modality": "ontology + gene annotations",
   "platform": "OBO + GAF 2.2",

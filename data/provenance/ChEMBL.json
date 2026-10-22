@@ -2,7 +2,7 @@
   "source": "ChEMBL",
   "accession": "ChEMBL REST API (current)",
   "url": "https://www.ebi.ac.uk/chembl/api/data",
-  "date_pulled": "2026-10-22T16:51:27+00:00",
+  "date_pulled": "2026-10-22T17:06:01+00:00",
   "sample_count": 103,
   "modality": "pharmacology (mechanisms, IC50)",
   "platform": "REST API",

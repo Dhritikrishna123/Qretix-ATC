@@ -2,7 +2,7 @@
   "source": "cBioPortal (AACR GENIE)",
   "accession": "genie_public",
   "url": "https://www.cbioportal.org/api/studies/genie_public",
-  "date_pulled": "2026-10-22T16:41:32+00:00",
+  "date_pulled": "2026-10-22T17:03:57+00:00",
   "sample_count": "n/a",
   "modality": "genomics",
   "platform": "n/a",

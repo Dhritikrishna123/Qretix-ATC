@@ -1,0 +1,26 @@
+{
+  "source": "PubMed (NCBI E-utilities)",
+  "accession": "query: \"thyroid cancer\"[tiab] OR \"thyroid carcinoma\"[tiab]",
+  "url": "https://pubmed.ncbi.nlm.nih.gov/?term=\"thyroid+cancer\"[tiab]+OR+\"thyroid+carcinoma\"[tiab]",
+  "date_pulled": "2026-10-22T17:01:55+00:00",
+  "sample_count": 57771,
+  "modality": "literature",
+  "platform": "PubMed XML",
+  "license": "NLM data (public; abstracts retain publisher copyright)",
+  "raw_files": [
+    "literature/thyroid_pubmed_corpus.json"
+  ],
+  "checksums": {
+    "literature/thyroid_pubmed_corpus.json": "sha256:9e2de7b00dfeec58970cde03ad7a39fdeca0152b9269b15b49b3c33e39bd695d"
+  },
+  "notes": "broad thyroid corpus: 57,771 articles, 57,771 with publication dates (PMID, title, abstract, date, journal, MeSH, author affiliations). Dates preserved per record for Phase 7.",
+  "qc_thresholds_applied": null,
+  "is_processed": false,
+  "status": "ok",
+  "query": "\"thyroid cancer\"[tiab] OR \"thyroid carcinoma\"[tiab]",
+  "years": [
+    1950,
+    2026
+  ],
+  "records_with_date": 57771
+}

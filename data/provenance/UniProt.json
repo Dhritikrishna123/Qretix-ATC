@@ -2,7 +2,7 @@
   "source": "UniProt",
   "accession": "UniProtKB/Swiss-Prot human (reviewed)",
   "url": "https://rest.uniprot.org/uniprotkb/stream?query=(organism_id:9606) AND (reviewed:true)",
-  "date_pulled": "2026-10-22T16:44:49+00:00",
+  "date_pulled": "2026-10-22T17:04:28+00:00",
   "sample_count": 20431,
   "modality": "protein annotation (domains, PTMs, localization, structure cross-refs)",
   "platform": "UniProt REST API (stream)",

@@ -2,7 +2,7 @@
   "source": "NCBI GEO DataSets (esearch, db=gds)",
   "accession": "query: anaplastic thyroid cancer",
   "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=gds&term=anaplastic+thyroid+cancer",
-  "date_pulled": "2026-10-22T16:26:00+00:00",
+  "date_pulled": "2026-10-22T17:03:55+00:00",
   "sample_count": 274,
   "modality": "dataset enumeration",
   "platform": "NCBI E-utilities",

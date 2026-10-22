@@ -2,7 +2,7 @@
   "source": "NCI GDC",
   "accession": "TCGA-THCA",
   "url": "https://portal.gdc.cancer.gov/projects/TCGA-THCA",
-  "date_pulled": "2026-10-22T16:41:59+00:00",
+  "date_pulled": "2026-10-22T17:04:02+00:00",
   "sample_count": 1025,
   "modality": "genomics + transcriptomics (PTC reference)",
   "platform": "TCGA (STAR counts, masked MAF, masked CNV segments)",

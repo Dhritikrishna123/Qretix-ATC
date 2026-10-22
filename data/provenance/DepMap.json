@@ -2,7 +2,7 @@
   "source": "DepMap Portal",
   "accession": "DepMap Public (manually supplied)",
   "url": "https://depmap.org/portal/data_page/",
-  "date_pulled": "2026-10-22T16:45:59+00:00",
+  "date_pulled": "2026-10-22T17:02:29+00:00",
   "sample_count": 7,
   "modality": "CRISPR dependency + omics (cell lines)",
   "platform": "CRISPR-Cas9 Chronos; expression TPM log2(x+1); CN; somatic mutations",

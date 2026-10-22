@@ -2,7 +2,7 @@
   "source": "NCBI GEO",
   "accession": "GSE193581",
   "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE193581",
-  "date_pulled": "2026-10-22T16:52:17+00:00",
+  "date_pulled": "2026-10-22T17:02:32+00:00",
   "sample_count": 32,
   "modality": "scRNA-seq",
   "platform": "10x Genomics 3' v3 [GPL24676]",
