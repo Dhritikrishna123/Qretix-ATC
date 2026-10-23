@@ -16,8 +16,8 @@ TABLE_EXT = (".tsv", ".csv", ".txt", ".xlsx", ".txt.gz", ".tsv.gz", ".csv.gz")
 def list_files(accession: str) -> list[dict[str, Any]]:
     out, page = [], 0
     while True:
-        batch = get_json(f"{config.PRIDE_API}/files/byProject",
-                         params={"accession": accession, "pageSize": 100, "page": page})
+        batch = get_json(f"{config.PRIDE_API}/projects/{accession}/files",
+                         params={"pageSize": 100, "page": page})
         if not batch:
             return out
         out.extend(batch)

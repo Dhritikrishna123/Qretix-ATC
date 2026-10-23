@@ -78,6 +78,12 @@ def search_genie_atc() -> str:
     """Look for ATC cases in AACR GENIE (OncoTree code THAP) without pulling the full study."""
     name = "AACR_GENIE_ATC"
     try:
+        studies = get_json(f"{config.CBIOPORTAL_API}/studies", params={"projection": "ID"}, timeout=120)
+        if config.CBIO_GENIE_STUDY not in {s["studyId"] for s in studies}:
+            raise LookupError(
+                f"study '{config.CBIO_GENIE_STUDY}' is not hosted on the public cBioPortal instance; "
+                "AACR GENIE is distributed via Synapse (syn7222066) after registration/data-use acceptance, "
+                "so it requires manual access")
         rows = get_json(
             f"{config.CBIOPORTAL_API}/studies/{config.CBIO_GENIE_STUDY}/clinical-data",
             params={"clinicalDataType": "SAMPLE", "attributeId": "ONCOTREE_CODE",
@@ -154,7 +160,15 @@ def fetch_gdc_thca(force: bool = False, download_data: bool = False, expression:
                 if dest.exists() and not force:
                     files.append(dest)
                     continue
-                download(f"{config.GDC_API}/data/{h['file_id']}", dest, force=force)
+                for attempt in range(1, 6):
+                    try:
+                        download(f"{config.GDC_API}/data/{h['file_id']}", dest, force=force)
+                        break
+                    except Exception:
+                        if attempt == 5:
+                            raise
+                        import time
+                        time.sleep(5 * attempt)
                 files.append(dest)
     counts = {k: len(v) for k, v in sets.items()}
     log_decision(
