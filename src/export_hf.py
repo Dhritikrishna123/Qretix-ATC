@@ -300,7 +300,7 @@ from huggingface_hub import hf_hub_download
 
 # Download and read gene dependency table
 file_path = hf_hub_download(
-    repo_id="Dhritikrishna123/qretix-atc-phase1",
+    repo_id="q-retix-ai/qretix-atc-phase1",
     filename="data/depmap_atc_dependency.parquet",
     repo_type="dataset"
 )
@@ -309,7 +309,7 @@ print(dep_df.head())
 
 # Read curated ATC PubMed corpus
 corpus_path = hf_hub_download(
-    repo_id="Dhritikrishna123/qretix-atc-phase1",
+    repo_id="q-retix-ai/qretix-atc-phase1",
     filename="data/atc_pubmed_corpus.parquet",
     repo_type="dataset"
 )
@@ -379,7 +379,7 @@ def package_phase1_for_hf() -> Dict[str, Any]:
 
 
 def upload_to_huggingface(
-    repo_id: str = "Dhritikrishna123/qretix-atc-phase1",
+    repo_id: str = "q-retix-ai/qretix-atc-phase1",
     private: bool = False,
 ) -> str:
     """Creates repo if needed and uploads the package folder to Hugging Face."""
@@ -404,7 +404,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Package and upload Phase 1 to Hugging Face.")
     parser.add_argument("--upload", action="store_true", help="Upload directly to Hugging Face Hub.")
-    parser.add_argument("--repo-id", default="Dhritikrishna123/qretix-atc-phase1", help="HF repo ID.")
+    parser.add_argument("--repo-id", default="q-retix-ai/qretix-atc-phase1", help="HF repo ID.")
     parser.add_argument("--private", action="store_true", help="Make repository private.")
     args = parser.parse_args()
 
